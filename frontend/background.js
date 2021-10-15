@@ -1,0 +1,1 @@
+// this will read the page contents and make the API requests to the backend

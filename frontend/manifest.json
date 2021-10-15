@@ -1,0 +1,9 @@
+{
+    "name": "Hate Detection Assistant",
+    "description": "Detects hate speech on the page you're on, and offers suggestions to take action",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    }
+}
