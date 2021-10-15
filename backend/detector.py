@@ -1,0 +1,1 @@
+# here we'll have an endpoint which will take in a request and using the hate detection model will return whether the text in the request body is hateful or not. 
