@@ -1,0 +1,10 @@
+@domain=http://localhost:5000
+
+
+## Get events per organization (random org)
+POST {{domain}}/detect
+content-type: application/json
+
+{
+    "Text": "It's all love here"
+}

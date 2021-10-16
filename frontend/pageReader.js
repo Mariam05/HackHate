@@ -6,14 +6,18 @@
 // @grant       none
 // ==/UserScript==
 
+var endpoint_url = "http://localhost:5000/detect"
+
 
 function scanPage() {
     var body = document.body;
-    var textContent = body.textContent || body.innerText;
+    // var textContent = body.textContent || body.innerText; // html way
+    var textContent = $('body').text();
+    console.log("jquery Textbody "  + $('body').text()); // we can use this when I figure out how to add jquery
 
-    // console.log("jquery Textbody" + $('body').text()); // we can use this when I figure out how to add jquery
-
-    console.log("Textbody " + textContent);
+    $.post(endpoint_url, {"text":textContent}, function(data){
+        console.log("Response: " + data);
+    });
 }
 
 setTimeout(() => chrome.storage.local.get('disabled', storage => {
@@ -21,6 +25,4 @@ setTimeout(() => chrome.storage.local.get('disabled', storage => {
     if (!storage.disabled) {
         scanPage();
     }
-
-    chrome.storage.onChanged.addListener(() => window.location.reload())
 }), 10);
