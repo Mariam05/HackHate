@@ -2,6 +2,9 @@
     "name": "Hate Detection Assistant",
     "description": "Detects hate speech on the page you're on, and offers suggestions to take action",
     "version": "1.0",
+    "action": {
+        "default_icon": "images/hearts.png"
+    },
     "content_scripts": [
         {
             "matches": [
@@ -9,7 +12,8 @@
                 "file:///*"
             ],
             "js": [
-                "jquery-3.6.0.min.js","pageReader.js"
+                "jquery-3.6.0.min.js",
+                "pageReader.js"
             ],
             "run_at": "document_end",
             "all_frames": true
@@ -19,13 +23,11 @@
     "background": {
         "service_worker": "background.js"
     },
-    "action": {
-        "default_icon": "images/hearts.png"
-    },
     "permissions": [
         "storage",
         "activeTab",
-        "scripting"
+        "scripting",
+        "notifications"
     ],
     "commands": {
         "_execute_action": {
