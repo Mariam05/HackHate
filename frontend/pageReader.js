@@ -39,7 +39,7 @@ var scanPage =  () => {
 }
 
 function sendMessage() {
-    chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+    chrome.runtime.sendMessage({showmessage: "yes"}, function(response) {
         console.log(response.farewell);
       });
 }
