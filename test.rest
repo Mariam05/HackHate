@@ -6,7 +6,7 @@ POST {{domain}}/detect
 content-type: application/json
 
 {
-    "Text": "hiii"
+    "Text": "I hate muslims"
 }
 
 ###
