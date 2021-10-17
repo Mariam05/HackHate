@@ -18,7 +18,7 @@ var scanPage =  () => {
     $.ajax({
         url: endpoint_url+"detect",
         type: "POST",
-        data: JSON.stringify({'Text':textContent, 'domain':'reddit.com'}),
+        data: JSON.stringify({'Text':textContent, 'domain':'facebook.com'}),
         contentType:"application/json",
         success: function(data) {
             console.log("response: " + JSON.stringify(data));
