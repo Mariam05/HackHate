@@ -9,34 +9,40 @@
 var endpoint_url = "http://localhost:5000/"
 
 var scanPage =  () => {
-    console.log("in scan page");
     // var textContent = document.body.textContent || document.body.innerText; // html way
     var textContent = $('body').text();
     console.log("jquery Textbody "  + $('body').text()); // we can use this when I figure out how to add jquery
-
-    $.post(endpoint_url+"detect", {"text":textContent}, function(data){
-        console.log("Response: " + data);
-        console.log("url: " + window.location.toString());
-        // if hate
-            // sendMessage();
-            // reportDomain();
-    });
-}
-
-// report the domain of the hate speech
-function reportDomain() {
     var domain = window.location.hostname;
-    $.post(endpoint_url+"report", {"domain": domain});
-}
+    console.log("domain " + domain);
 
+    $.ajax({
+        url: endpoint_url+"detect",
+        type: "POST",
+        data: JSON.stringify({'Text':textContent, 'domain':'reddit.com'}),
+        contentType:"application/json",
+        success: function(data) {
+            console.log("response: " + JSON.stringify(data));
+            console.log("success");
+            response =  JSON.stringify(data);
+            if (data == "True") {
+                console.log("hate speech");
+                sendMessage();
+            } else {
+                console.log("Not hate speech");
+            }
+        },
+        error: function(data) {
+            // console.log(data);
+            console.log("failure");
+        }
+      });
+}
 
 function sendMessage() {
     chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
         console.log(response.farewell);
       });
 }
-
-
 
 setTimeout(() => chrome.storage.local.get('disabled', storage => {
     console.log(`Hate helper is ${storage.disabled ? 'disabled' : 'enabled'}`);
