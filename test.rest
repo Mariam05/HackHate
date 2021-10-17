@@ -6,7 +6,7 @@ POST {{domain}}/detect
 content-type: application/json
 
 {
-    "Text": "It's all love here"
+    "Text": "hiii"
 }
 
 ###
@@ -14,7 +14,7 @@ PUT {{domain}}/report
 content-type: application/json
 
 {
-    "name": "facebook.com"
+    "name": "youtube.com"
 }
 
 ###

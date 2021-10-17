@@ -10,6 +10,7 @@ from flask_restful import Resource, Api, reqparse
 import logging as log
 import pymongo
 import os
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -51,14 +52,32 @@ def create_record():
     domain.save()
     return jsonify(domain.to_json())
 
+
+# Model goes here
 @app.route('/detect', methods=["POST"])
 def post():
+    isHate = query(request.get_json()['Text'])# do the detection
     print(request.get_json())
-    resp = flask.Response("Foo bar baz")
+    resp = flask.Response(str(isHate))
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
+def query(payload):
+    API_URL = os.getenv("API_URL")
+    bearer = os.getenv("AUTHORIZATION_BEARER")
+    headers = {"Authorization": bearer}
 
+    res = []
+    hate = True
+    data = json.dumps(payload)
+    response = requests.request("POST", API_URL, headers=headers, data=data)
+    value = json.loads(response.content.decode("utf-8"))
+    for dic in value[0]:
+        res.append(dic['score'])
+    if res[0] > res[1]:
+        hate = False
+
+    return hate
 
 
 @app.route('/test', methods=["GET"])

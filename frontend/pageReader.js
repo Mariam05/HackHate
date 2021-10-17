@@ -18,7 +18,7 @@ var scanPage =  () => {
         console.log("Response: " + data);
         console.log("url: " + window.location.toString());
         // if hate
-            // sendMessage();
+            sendMessage();
             // reportDomain();
     });
 }
